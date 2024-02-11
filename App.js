@@ -10,7 +10,6 @@ import {
   buildTokenizer,
   buildSampler,
   generate,
-  // chat,
 } from './llamajs/core';
 
 export default function App() {
@@ -67,16 +66,14 @@ export default function App() {
       const sampler = buildSampler(vocabSize, temperature, topp, rngSeed);
     
       if (mode === "generate") {
-        // await generate(transformer, tokenizer, sampler, prompt, steps);
         generate(transformer, tokenizer, sampler, prompt, steps, setRunResult);
-
         //TODOS
-        //Return type for setState model running return
+        //Stream needed!
       } 
 
-      else if (mode === "chat") {
-        await chat(transformer, tokenizer, sampler, prompt, null, steps);
-      }
+      // else if (mode === "chat") {
+      //   await chat(transformer, tokenizer, sampler, prompt, null, steps);
+      // }
 
     } catch (e) {
       console.log(e);
