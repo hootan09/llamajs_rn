@@ -21,6 +21,10 @@ export default function App() {
     tokenizerUri: ""
   })
 
+  const timeout = async(delay)=> {
+    return new Promise( res => setTimeout(res, delay) );
+  }
+
   const loadModel = async()=>{
     try {
       const assets = await Asset.loadAsync([require('./assets/models/stories260K.bin'),require('./assets/models/tok512.bin')]);
@@ -66,12 +70,13 @@ export default function App() {
       const sampler = buildSampler(vocabSize, temperature, topp, rngSeed);
     
       if (mode === "generate") {
-        generate(transformer, tokenizer, sampler, prompt, steps, (text)=> {
+        generate(transformer, tokenizer, sampler, prompt, steps, async(text)=> {
+          await timeout(0.000001)
           setRunResult((oldText)=> {
-            let newText = oldText + text
-            console.log(newText);
-            return newText;
+            // console.log(newText);
+            return oldText + text;
           })
+          
         });
       } 
       // else if (mode === "chat") {
