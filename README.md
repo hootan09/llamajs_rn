@@ -17,7 +17,7 @@ $ npx expo prebuild
 $ expo run:android
 ```
 
-<img src="./assets/Screenshot_1707679671.png?raw=true" alt="result" style="width:300px;"/>
+<img src="./assets/android.gif?raw=true" alt="result" style="width:300px;"/>
 
 ## License
 MIT
