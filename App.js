@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { Alert, Button, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Alert, Button, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { Asset } from 'expo-asset';
 import { useState } from 'react';
@@ -23,7 +23,7 @@ export default function App() {
   const [temperature, setTemperature] = useState(1.0);
   const [topp, setTopp] = useState(0.9);
   const [steps, setSteps] = useState(256);
-  const [prompt, setPrompt] = useState("");
+  const [prompt, setPrompt] = useState("Once upon a time ");
 
   const timeout = async(delay)=> {
     return new Promise( res => setTimeout(res, delay) );
@@ -37,10 +37,10 @@ export default function App() {
       if(!assets[0]?.localUri && !assets[1]?.localUri) {
         // Alert.alert('failed to get model URI', `${assets[0]}`);
         console.log('Failed to get model & tokenizer URI', `${assets[0]}`);
-        setModelStatus(`Failed to get model & tokenizer URI ${assets[0]}`)
+        setModelStatus(`Failed to get model & tokenizer`)
       } else {
         console.log('Models & Tokenizer loaded!')
-        setModelStatus(`Models & Tokenizer loaded!`)
+        setModelStatus(`Model & tokenizer loaded!`)
         // Alert.alert(
         //   'model loaded successfully',
         //   );
@@ -48,7 +48,7 @@ export default function App() {
     } catch (e) {
       // Alert.alert('failed to load model', `${e}`);
       console.log('Failed to load model', `${e}`);
-      setModelStatus(`Failed to load model ${e}`)
+      setModelStatus(`Failed to load model`)
       throw e;
     }
   }
@@ -97,30 +97,75 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Using LlamaJs for React Native</Text>
-      <Button title='Load model' onPress={loadModel}></Button>
-      <Text style={styles.modetStatusText}>Model Load Status: {modelStatus}</Text>
-      <View style={{padding: 20}}/>
-      <Button title='Run Inference' onPress={runModel}></Button>
+
+      <View style={styles.loadModelWrapper}>
+        <Text style={styles.modetStatusText}>Temperature:</Text>
+        <TextInput style={[styles.inputBox,{ marginLeft: 5}]} defaultValue={temperature.toString()} value={temperature.toString()} keyboardType='numeric' onChangeText={(value)=> setTemperature(+value)}/>
+      </View>
+
+      <View style={styles.loadModelWrapper}>
+        <Text style={styles.modetStatusText}>Top:</Text>
+        <TextInput style={[styles.inputBox,{ marginLeft: 60}]} defaultValue={topp.toString()} value={topp.toString()} keyboardType='numeric' onChangeText={(value)=> setTopp(+value)}/>
+      </View>
+
+      <View style={styles.loadModelWrapper}>
+        <Text style={styles.modetStatusText}>Steps:</Text>
+        <TextInput style={[styles.inputBox,{ marginLeft: 50}]} defaultValue={steps.toString()} value={steps.toString()} keyboardType='numeric' onChangeText={(value)=> setSteps(+value)}/>
+      </View>
+
+      <View style={styles.loadModelWrapper}>
+      <Text style={styles.modetStatusText}>Prompt:</Text>
+        <TextInput style={[styles.inputBox,{ marginLeft: 40, width: 200}]} defaultValue={prompt.toString()} value={prompt.toString()} keyboardType='default' onChangeText={(value)=> setPrompt(value)}/>
+      </View>
+
+      <View style={styles.loadModelWrapper}>
+        <Button title='Load Model' onPress={loadModel}></Button>
+        <Text style={styles.modetStatusText}>Status: {modelStatus}</Text>
+      </View>
+      {/* <View style={{padding: 20}}/> */}
+
+      <View style={styles.loadModelWrapper}>
+        <Button title='Run Inference' onPress={runModel}></Button>
+      </View>
+
       <ScrollView contentContainerStyle={{}}>
         <Text style={styles.runResultText}> {'Result:\n\n'+ runResult}</Text>
       </ScrollView>
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 50,
+    marginTop: 25,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'flex-start',
+    marginHorizontal: 10,
+  },
+  loadModelWrapper: {
+    width: '100%',
+    paddingHorizontal: 10,
+    // paddingVertical: 5,
+    // borderRadius: 15,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    backgroundColor: '#EBECED'
+  },
+  inputBox: {
+    borderWidth: 2,
+    borderColor: 'black',
+    width: 100,
+    borderRadius: 10,
+    paddingHorizontal: 10,
   },
   title: {
-    fontSize: 22,
+    fontSize: 16,
     fontWeight: '700',
     marginBottom: 5,
   },

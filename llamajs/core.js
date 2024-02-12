@@ -684,7 +684,7 @@ const generate = (transformer, tokenizer, sampler, prompt, steps, streamText) =>
       let endTime = Date.now();
       let seconds = (endTime - startTime) / 1000;
       // console.log(`Tokens per second: ${(pos - 1) / seconds}`);
-      streamText(`Tokens per second: ${(pos - 1) / seconds}`);
+      streamText(`\n\nTokens per second: ${(pos - 1) / seconds}`);
     }
 }
 
