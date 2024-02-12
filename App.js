@@ -20,6 +20,10 @@ export default function App() {
     modelUri: "",
     tokenizerUri: ""
   })
+  const [temperature, setTemperature] = useState(1.0);
+  const [topp, setTopp] = useState(0.9);
+  const [steps, setSteps] = useState(256);
+  const [prompt, setPrompt] = useState("");
 
   const timeout = async(delay)=> {
     return new Promise( res => setTimeout(res, delay) );
@@ -50,13 +54,14 @@ export default function App() {
   }
 
   const runModel = async()=> {
+    setRunResult('')
     try {
       let checkpointPath = uris.modelUri
       let tokenizerPath = uris.tokenizerUri;
-      let temperature = 1.0;
-      let topp = 0.9;
-      let steps = 256;
-      let prompt = "";
+      // let temperature = 1.0;
+      // let topp = 0.9;
+      // let steps = 256;
+      // let prompt = "";
       let rngSeed = 133742;
       let mode = "generate";
   
