@@ -635,7 +635,7 @@ const forward = (transformer, token, pos) => {
     return s.logits;
 }
 
-const generate = (transformer, tokenizer, sampler, prompt, steps, setRunResult) => {
+const generate = (transformer, tokenizer, sampler, prompt, steps, streamText) => {
     // encode prompt
     let promptTokens = [];
     const numPromptTokens = encode(tokenizer, prompt, 1, 0, promptTokens);
@@ -648,7 +648,7 @@ const generate = (transformer, tokenizer, sampler, prompt, steps, setRunResult) 
     let token = promptTokens[0];
     let pos = 0;
   
-    let piece = '';
+
     while (pos < steps) {
       let logits = forward(transformer, token, pos);
   
@@ -666,11 +666,10 @@ const generate = (transformer, tokenizer, sampler, prompt, steps, setRunResult) 
       if (next === 1) break;
   
       // print token
-      // let piece = decode(tokenizer, token, next);
+      let piece = decode(tokenizer, token, next);
       // process.stdout.write(piece);
-      piece += decode(tokenizer, token, next);
-      console.log(piece);
-      setRunResult(piece)
+      // console.log(piece);
+      streamText(piece);
 
       token = next;
   
@@ -684,10 +683,8 @@ const generate = (transformer, tokenizer, sampler, prompt, steps, setRunResult) 
     if (pos > 1) {
       let endTime = Date.now();
       let seconds = (endTime - startTime) / 1000;
-      console.log(`Tokens per second: ${(pos - 1) / seconds}`);
-      setRunResult(oldpiece=> {
-        return oldpiece + '\n\n' + `Tokens per second: ${(pos - 1) / seconds}`
-      })
+      // console.log(`Tokens per second: ${(pos - 1) / seconds}`);
+      streamText(`Tokens per second: ${(pos - 1) / seconds}`);
     }
 }
 

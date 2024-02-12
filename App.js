@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { Alert, Button, StyleSheet, Text, View } from 'react-native';
+import { Alert, Button, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { Asset } from 'expo-asset';
 import { useState } from 'react';
@@ -55,7 +55,7 @@ export default function App() {
       let prompt = "";
       let rngSeed = 133742;
       let mode = "generate";
-
+  
       const transformer = {};
       await buildTransformer(transformer, checkpointPath);
     
@@ -66,11 +66,14 @@ export default function App() {
       const sampler = buildSampler(vocabSize, temperature, topp, rngSeed);
     
       if (mode === "generate") {
-        generate(transformer, tokenizer, sampler, prompt, steps, setRunResult);
-        //TODOS
-        //Stream needed!
+        generate(transformer, tokenizer, sampler, prompt, steps, (text)=> {
+          setRunResult((oldText)=> {
+            let newText = oldText + text
+            console.log(newText);
+            return newText;
+          })
+        });
       } 
-
       // else if (mode === "chat") {
       //   await chat(transformer, tokenizer, sampler, prompt, null, steps);
       // }
@@ -83,7 +86,6 @@ export default function App() {
     }
   }
 
-
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Using LlamaJs for React Native</Text>
@@ -91,7 +93,9 @@ export default function App() {
       <Text style={styles.modetStatusText}>Model Load Status: {modelStatus}</Text>
       <View style={{padding: 20}}/>
       <Button title='Run Inference' onPress={runModel}></Button>
-      <Text style={styles.runResultText}>Result: {'\n\n'+ runResult}</Text>
+      <ScrollView contentContainerStyle={{}}>
+        <Text style={styles.runResultText}> {'Result:\n\n'+ runResult}</Text>
+      </ScrollView>
       <StatusBar style="auto" />
     </View>
   );
