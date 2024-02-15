@@ -26,9 +26,9 @@ $ expo run:android #it also works with expo go app
 - [ ] Support for chat.
 
 
-### Showing demo on Android and IOS 
+### Showing demo on Android and IOS
 <img src="./assets/android.gif?raw=true" alt="result" style="width:300px;"/>
-<img src="./assets/ios.png?raw=true" alt="result" style="width:300px;"/>
+<img src="./assets/ios.PNG?raw=true" alt="result" style="width:300px;"/>
 
 ## License
 MIT
