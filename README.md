@@ -25,7 +25,10 @@ $ expo run:android #it also works with expo go app
 - [ ] Native `llama.c` or `.cpp` version of Node, if possible.
 - [ ] Support for chat.
 
+
+### Showing demo on Android and IOS
 <img src="./assets/android.gif?raw=true" alt="result" style="width:300px;"/>
+<img src="./assets/ios.png?raw=true" alt="result" style="width:300px;"/>
 
 ## License
 MIT
