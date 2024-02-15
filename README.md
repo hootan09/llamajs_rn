@@ -19,10 +19,10 @@ $ expo run:android
 
 #### TODOS:
 
-- [ ] runOnJs or 'worklet' for dont lock the main thread in inference time
-- [ ] support for 8 bit quatization
-- [ ] better UI
-- [ ] Supprot native llama.c or cpp version of node if it possible
+- [ ] RunOnJs or 'worklet' for dont lock the main thread in inference time
+- [ ] Support for 8bit quatization for speed.(16float point is default)
+- [ ] Better UI
+- [ ] Support native llama.c or cpp version of node if it possible
 
 <img src="./assets/android.gif?raw=true" alt="result" style="width:300px;"/>
 
