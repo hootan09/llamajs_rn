@@ -23,6 +23,7 @@ $ expo run:android
 - [ ] Support for 8bit quatization for speed.(16float point is default)
 - [ ] Better UI
 - [ ] Support native llama.c or cpp version of node if it possible
+- [ ] Support Chat
 
 <img src="./assets/android.gif?raw=true" alt="result" style="width:300px;"/>
 
