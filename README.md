@@ -14,7 +14,7 @@ Then run the LLM.
 ```sh
 $ yarn install
 $ npx expo prebuild
-$ expo run:android
+$ expo run:android #it also works with expo go app
 ```
 
 #### TODOS:
