@@ -28,8 +28,8 @@ $ expo run:android #it also works with expo go app
 
 ### Showing demo on Android and IOS
 <p align="center">
-<img src="./assets/android.gif?raw=true" alt="result" style="width:45%;"/>
-<img src="./assets/ios.PNG?raw=true" alt="result" style="width:22%;"/>
+<img src="./assets/android.gif?raw=true" alt="result" style="width:70%;"/>
+<img src="./assets/ios.PNG?raw=true" alt="result" style="width:35%;"/>
 </p>
 
 ## License
