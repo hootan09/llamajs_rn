@@ -19,7 +19,7 @@ $ expo run:android
 
 #### TODOS:
 
-- [ ] runOnJs or 'worklet' for dont lock the mmain thread on inference time
+- [ ] runOnJs or 'worklet' for dont lock the main thread in inference time
 - [ ] support for 8 bit quatization
 - [ ] better UI
 - [ ] Supprot native llama.c or cpp version of node if it possible
