@@ -20,7 +20,7 @@ $ expo run:android #it also works with expo go app
 #### TODOS:
 
 - [ ] Using `runOnJs` or 'worklet' to avoid locking the main thread during inference time.
-- [ ] Support for 8-bit quantization for speed (16 float point is default).
+- [ ] Support for 8-bit quantization for speed (32 float point is default).
 - [ ] Better UI support.
 - [ ] Native `llama.c` or `.cpp` version of Node, if possible.
 - [ ] Support for chat.
